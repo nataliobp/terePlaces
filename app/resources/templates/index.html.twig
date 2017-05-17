@@ -1,0 +1,199 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teresa Places Finder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js"></script>
+</head>
+
+<body style="padding: 20px;">
+
+<form>
+
+    <h3 class="subheader float-left">Teresa Places Finder!!</h3>
+    <h7 class="subheader float-right">Today: {{ count }} searchs</h7>
+
+    <div style="clear: both"></div>
+
+    <fieldset class="fieldset" style="background-color: #fff3d9">
+
+        <div class="medium-5 columns">
+            <label for="search">search
+                <input type="text" id="search" name="search"  value="{{ params.search|default('') }}" >
+            </label>
+        </div>
+
+        <div class="medium-2 columns">
+            <label for="latitude">latitude (.)
+                <input type="text" name="latitude" id="latitude" value="{{ params.latitude|default('') }}" />
+            </label>
+        </div>
+
+        <div class="medium-2 columns">
+            <label for="longitude">longitude (.)
+                <input type="text" name="longitude" id="longitude" value="{{ params.longitude|default('') }}" />
+            </label>
+        </div>
+
+        <div class="medium-2 columns float-left">
+            <label for="radio">radio (metros)
+                <input type="text" name="radio" id="radio" value="{{ params.radio|default('') }}" />
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="fieldset" style="background-color: #fff3d9">
+
+        <div class="switch">
+            <input class="switch-input" id="mySwitch" type="checkbox" name="mySwitch">
+            <label class="switch-paddle" for="mySwitch">
+                <span class="show-for-sr">Tipos</span>
+            </label>
+        </div>
+
+        <div id="types" style="display: none">
+            <input type="checkbox" name="types[]" {% if 'accounting' in params.types %} checked {% endif %} id="accounting" value="accounting"><label for="accounting">accounting</label>
+            <input type="checkbox" name="types[]" {% if 'airport' in params.types %} checked {% endif %} id="airport" value="airport"><label for="airport">airport</label>
+            <input type="checkbox" name="types[]" {% if 'amusement_park' in params.types %} checked {% endif %} id="amusement_park" value="amusement_park"><label for="amusement_park">amusement_park</label>
+            <input type="checkbox" name="types[]" {% if 'aquarium' in params.types %} checked {% endif %} id="aquarium" value="aquarium"><label for="aquarium">aquarium</label>
+            <input type="checkbox" name="types[]" {% if 'art_gallery' in params.types %} checked {% endif %} id="art_gallery" value="art_gallery"><label for="art_gallery">art_gallery</label>
+            <input type="checkbox" name="types[]" {% if 'atm' in params.types %} checked {% endif %} id="atm" value="atm"><label for="atm">atm</label>
+            <input type="checkbox" name="types[]" {% if 'bakery' in params.types %} checked {% endif %} id="bakery" value="bakery"><label for="bakery">bakery</label>
+            <input type="checkbox" name="types[]" {% if 'bank' in params.types %} checked {% endif %} id="bank" value="bank"><label for="bank">bank</label>
+            <input type="checkbox" name="types[]" {% if 'bar' in params.types %} checked {% endif %} id="bar" value="bar"><label for="bar">bar</label>
+            <input type="checkbox" name="types[]" {% if 'beauty_salon' in params.types %} checked {% endif %} id="beauty_salon" value="beauty_salon"><label for="beauty_salon">beauty_salon</label>
+            <input type="checkbox" name="types[]" {% if 'bicycle_store' in params.types %} checked {% endif %} id="bicycle_store" value="bicycle_store"><label for="bicycle_store">bicycle_store</label>
+            <input type="checkbox" name="types[]" {% if 'book_store' in params.types %} checked {% endif %} id="book_store" value="book_store"><label for="book_store">book_store</label>
+            <input type="checkbox" name="types[]" {% if 'bowling_alley' in params.types %} checked {% endif %} id="bowling_alley" value="bowling_alley"><label for="bowling_alley">bowling_alley</label>
+            <input type="checkbox" name="types[]" {% if 'bus_station' in params.types %} checked {% endif %} id="bus_station" value="bus_station"><label for="bus_station">bus_station</label>
+            <input type="checkbox" name="types[]" {% if 'cafe' in params.types %} checked {% endif %} id="cafe" value="cafe"><label for="cafe">cafe</label>
+            <input type="checkbox" name="types[]" {% if 'campground' in params.types %} checked {% endif %} id="campground" value="campground"><label for="campground">campground</label>
+            <input type="checkbox" name="types[]" {% if 'car_dealer' in params.types %} checked {% endif %} id="car_dealer" value="car_dealer"><label for="car_dealer">car_dealer</label>
+            <input type="checkbox" name="types[]" {% if 'car_rental' in params.types %} checked {% endif %} id="car_rental" value="car_rental"><label for="car_rental">car_rental</label>
+            <input type="checkbox" name="types[]" {% if 'car_repair' in params.types %} checked {% endif %} id="car_repair" value="car_repair"><label for="car_repair">car_repair</label>
+            <input type="checkbox" name="types[]" {% if 'car_wash' in params.types %} checked {% endif %} id="car_wash" value="car_wash"><label for="car_wash">car_wash</label>
+            <input type="checkbox" name="types[]" {% if 'casino' in params.types %} checked {% endif %} id="casino" value="casino"><label for="casino">casino</label>
+            <input type="checkbox" name="types[]" {% if 'cemetery' in params.types %} checked {% endif %} id="cemetery" value="cemetery"><label for="cemetery">cemetery</label>
+            <input type="checkbox" name="types[]" {% if 'church' in params.types %} checked {% endif %} id="church" value="church"><label for="church">church</label>
+            <input type="checkbox" name="types[]" {% if 'city_hall' in params.types %} checked {% endif %} id="city_hall" value="city_hall"><label for="city_hall">city_hall</label>
+            <input type="checkbox" name="types[]" {% if 'clothing_store' in params.types %} checked {% endif %} id="clothing_store" value="clothing_store"><label for="clothing_store">clothing_store</label>
+            <input type="checkbox" name="types[]" {% if 'convenience_store' in params.types %} checked {% endif %} id="convenience_store" value="convenience_store"><label for="convenience_store">convenience_store</label>
+            <input type="checkbox" name="types[]" {% if 'courthouse' in params.types %} checked {% endif %} id="courthouse" value="courthouse"><label for="courthouse">courthouse</label>
+            <input type="checkbox" name="types[]" {% if 'dentist' in params.types %} checked {% endif %} id="dentist" value="dentist"><label for="dentist">dentist</label>
+            <input type="checkbox" name="types[]" {% if 'department_store' in params.types %} checked {% endif %} id="department_store" value="department_store"><label for="department_store">department_store</label>
+            <input type="checkbox" name="types[]" {% if 'doctor' in params.types %} checked {% endif %} id="doctor" value="doctor"><label for="doctor">doctor</label>
+            <input type="checkbox" name="types[]" {% if 'electrician' in params.types %} checked {% endif %} id="electrician" value="electrician"><label for="electrician">electrician</label>
+            <input type="checkbox" name="types[]" {% if 'electronics_store' in params.types %} checked {% endif %} id="electronics_store" value="electronics_store"><label for="electronics_store">electronics_store</label>
+            <input type="checkbox" name="types[]" {% if 'embassy' in params.types %} checked {% endif %} id="embassy" value="embassy"><label for="embassy">embassy</label>
+            <input type="checkbox" name="types[]" {% if 'establishment' in params.types %} checked {% endif %} id="establishment" value="establishment"><label for="establishment">establishment</label>
+            <input type="checkbox" name="types[]" {% if 'finance' in params.types %} checked {% endif %} id="finance" value="finance"><label for="finance">finance</label>
+            <input type="checkbox" name="types[]" {% if 'fire_station' in params.types %} checked {% endif %} id="fire_station" value="fire_station"><label for="fire_station">fire_station</label>
+            <input type="checkbox" name="types[]" {% if 'florist' in params.types %} checked {% endif %} id="florist" value="florist"><label for="florist">florist</label>
+            <input type="checkbox" name="types[]" {% if 'food' in params.types %} checked {% endif %} id="food" value="food"><label for="food">food</label>
+            <input type="checkbox" name="types[]" {% if 'funeral_home' in params.types %} checked {% endif %} id="funeral_home" value="funeral_home"><label for="funeral_home">funeral_home</label>
+            <input type="checkbox" name="types[]" {% if 'furniture_store' in params.types %} checked {% endif %} id="furniture_store" value="furniture_store"><label for="furniture_store">furniture_store</label>
+            <input type="checkbox" name="types[]" {% if 'gas_station' in params.types %} checked {% endif %} id="gas_station" value="gas_station"><label for="gas_station">gas_station</label>
+            <input type="checkbox" name="types[]" {% if 'general_contractor' in params.types %} checked {% endif %} id="general_contractor" value="general_contractor"><label for="general_contractor">general_contractor</label>
+            <input type="checkbox" name="types[]" {% if 'grocery_or_supermarket' in params.types %} checked {% endif %} id="grocery_or_supermarket" value="grocery_or_supermarket"><label for="grocery_or_supermarket">grocery_or_supermarket</label>
+            <input type="checkbox" name="types[]" {% if 'gym' in params.types %} checked {% endif %} id="gym" value="gym"><label for="gym">gym</label>
+            <input type="checkbox" name="types[]" {% if 'hair_care' in params.types %} checked {% endif %} id="hair_care" value="hair_care"><label for="hair_care">hair_care</label>
+            <input type="checkbox" name="types[]" {% if 'hardware_store' in params.types %} checked {% endif %} id="hardware_store" value="hardware_store"><label for="hardware_store">hardware_store</label>
+            <input type="checkbox" name="types[]" {% if 'health' in params.types %} checked {% endif %} id="health" value="health"><label for="health">health</label>
+            <input type="checkbox" name="types[]" {% if 'hindu_temple' in params.types %} checked {% endif %} id="hindu_temple" value="hindu_temple"><label for="hindu_temple">hindu_temple</label>
+            <input type="checkbox" name="types[]" {% if 'home_goods_store' in params.types %} checked {% endif %} id="home_goods_store" value="home_goods_store"><label for="home_goods_store">home_goods_store</label>
+            <input type="checkbox" name="types[]" {% if 'hospital' in params.types %} checked {% endif %} id="hospital" value="hospital"><label for="hospital">hospital</label>
+            <input type="checkbox" name="types[]" {% if 'insurance_agency' in params.types %} checked {% endif %} id="insurance_agency" value="insurance_agency"><label for="insurance_agency">insurance_agency</label>
+            <input type="checkbox" name="types[]" {% if 'jewelry_store' in params.types %} checked {% endif %} id="jewelry_store" value="jewelry_store"><label for="jewelry_store">jewelry_store</label>
+            <input type="checkbox" name="types[]" {% if 'laundry' in params.types %} checked {% endif %} id="laundry" value="laundry"><label for="laundry">laundry</label>
+            <input type="checkbox" name="types[]" {% if 'lawyer' in params.types %} checked {% endif %} id="lawyer" value="lawyer"><label for="lawyer">lawyer</label>
+            <input type="checkbox" name="types[]" {% if 'library' in params.types %} checked {% endif %} id="library" value="library"><label for="library">library</label>
+            <input type="checkbox" name="types[]" {% if 'liquor_store' in params.types %} checked {% endif %} id="liquor_store" value="liquor_store"><label for="liquor_store">liquor_store</label>
+            <input type="checkbox" name="types[]" {% if 'local_government_office' in params.types %} checked {% endif %} id="local_government_office" value="local_government_office"><label for="local_government_office">local_government_office</label>
+            <input type="checkbox" name="types[]" {% if 'locksmith' in params.types %} checked {% endif %} id="locksmith" value="locksmith"><label for="locksmith">locksmith</label>
+            <input type="checkbox" name="types[]" {% if 'lodging' in params.types %} checked {% endif %} id="lodging" value="lodging"><label for="lodging">lodging</label>
+            <input type="checkbox" name="types[]" {% if 'meal_delivery' in params.types %} checked {% endif %} id="meal_delivery" value="meal_delivery"><label for="meal_delivery">meal_delivery</label>
+            <input type="checkbox" name="types[]" {% if 'meal_takeaway' in params.types %} checked {% endif %} id="meal_takeaway" value="meal_takeaway"><label for="meal_takeaway">meal_takeaway</label>
+            <input type="checkbox" name="types[]" {% if 'mosque' in params.types %} checked {% endif %} id="mosque" value="mosque"><label for="mosque">mosque</label>
+            <input type="checkbox" name="types[]" {% if 'movie_rental' in params.types %} checked {% endif %} id="movie_rental" value="movie_rental"><label for="movie_rental">movie_rental</label>
+            <input type="checkbox" name="types[]" {% if 'movie_theater' in params.types %} checked {% endif %} id="movie_theater" value="movie_theater"><label for="movie_theater">movie_theater</label>
+            <input type="checkbox" name="types[]" {% if 'moving_company' in params.types %} checked {% endif %} id="moving_company" value="moving_company"><label for="moving_company">moving_company</label>
+            <input type="checkbox" name="types[]" {% if 'museum' in params.types %} checked {% endif %} id="museum" value="museum"><label for="museum">museum</label>
+            <input type="checkbox" name="types[]" {% if 'night_club' in params.types %} checked {% endif %} id="night_club" value="night_club"><label for="night_club">night_club</label>
+            <input type="checkbox" name="types[]" {% if 'painter' in params.types %} checked {% endif %} id="painter" value="painter"><label for="painter">painter</label>
+            <input type="checkbox" name="types[]" {% if 'park' in params.types %} checked {% endif %} id="park" value="park"><label for="park">park</label>
+            <input type="checkbox" name="types[]" {% if 'parking' in params.types %} checked {% endif %} id="parking" value="parking"><label for="parking">parking</label>
+            <input type="checkbox" name="types[]" {% if 'pet_store' in params.types %} checked {% endif %} id="pet_store" value="pet_store"><label for="pet_store">pet_store</label>
+            <input type="checkbox" name="types[]" {% if 'pharmacy' in params.types %} checked {% endif %} id="pharmacy" value="pharmacy"><label for="pharmacy">pharmacy</label>
+            <input type="checkbox" name="types[]" {% if 'physiotherapist' in params.types %} checked {% endif %} id="physiotherapist" value="physiotherapist"><label for="physiotherapist">physiotherapist</label>
+            <input type="checkbox" name="types[]" {% if 'place_of_worship' in params.types %} checked {% endif %} id="place_of_worship" value="place_of_worship"><label for="place_of_worship">place_of_worship</label>
+            <input type="checkbox" name="types[]" {% if 'plumber' in params.types %} checked {% endif %} id="plumber" value="plumber"><label for="plumber">plumber</label>
+            <input type="checkbox" name="types[]" {% if 'police' in params.types %} checked {% endif %} id="police" value="police"><label for="police">police</label>
+            <input type="checkbox" name="types[]" {% if 'post_office' in params.types %} checked {% endif %} id="post_office" value="post_office"><label for="post_office">post_office</label>
+            <input type="checkbox" name="types[]" {% if 'real_estate_agency' in params.types %} checked {% endif %} id="real_estate_agency" value="real_estate_agency"><label for="real_estate_agency">real_estate_agency</label>
+            <input type="checkbox" name="types[]" {% if 'restaurant' in params.types %} checked {% endif %} id="restaurant" value="restaurant"><label for="restaurant">restaurant</label>
+            <input type="checkbox" name="types[]" {% if 'roofing_contractor' in params.types %} checked {% endif %} id="roofing_contractor" value="roofing_contractor"><label for="roofing_contractor">roofing_contractor</label>
+            <input type="checkbox" name="types[]" {% if 'rv_park' in params.types %} checked {% endif %} id="rv_park" value="rv_park"><label for="rv_park">rv_park</label>
+            <input type="checkbox" name="types[]" {% if 'school' in params.types %} checked {% endif %} id="school" value="school"><label for="school">school</label>
+            <input type="checkbox" name="types[]" {% if 'shoe_store' in params.types %} checked {% endif %} id="shoe_store" value="shoe_store"><label for="shoe_store">shoe_store</label>
+            <input type="checkbox" name="types[]" {% if 'shopping_mall' in params.types %} checked {% endif %} id="shopping_mall" value="shopping_mall"><label for="shopping_mall">shopping_mall</label>
+            <input type="checkbox" name="types[]" {% if 'spa' in params.types %} checked {% endif %} id="spa" value="spa"><label for="spa">spa</label>
+            <input type="checkbox" name="types[]" {% if 'stadium' in params.types %} checked {% endif %} id="stadium" value="stadium"><label for="stadium">stadium</label>
+            <input type="checkbox" name="types[]" {% if 'storage' in params.types %} checked {% endif %} id="storage" value="storage"><label for="storage">storage</label>
+            <input type="checkbox" name="types[]" {% if 'store' in params.types %} checked {% endif %} id="store" value="store"><label for="store">store</label>
+            <input type="checkbox" name="types[]" {% if 'subway_station' in params.types %} checked {% endif %} id="subway_station" value="subway_station"><label for="subway_station">subway_station</label>
+            <input type="checkbox" name="types[]" {% if 'synagogue' in params.types %} checked {% endif %} id="synagogue" value="synagogue"><label for="synagogue">synagogue</label>
+            <input type="checkbox" name="types[]" {% if 'taxi_stand' in params.types %} checked {% endif %} id="taxi_stand" value="taxi_stand"><label for="taxi_stand">taxi_stand</label>
+            <input type="checkbox" name="types[]" {% if 'train_station' in params.types %} checked {% endif %} id="train_station" value="train_station"><label for="train_station">train_station</label>
+            <input type="checkbox" name="types[]" {% if 'travel_agency' in params.types %} checked {% endif %} id="travel_agency" value="travel_agency"><label for="travel_agency">travel_agency</label>
+            <input type="checkbox" name="types[]" {% if 'university' in params.types %} checked {% endif %} id="university" value="university"><label for="university">university</label>
+            <input type="checkbox" name="types[]" {% if 'veterinary_care' in params.types %} checked {% endif %} id="veterinary_care" value="veterinary_care"><label for="veterinary_care">veterinary_care</label>
+            <input type="checkbox" name="types[]" {% if 'zoo' in params.types %} checked {% endif %} id="zoo" value="zoo"><label for="zoo">zoo</label>
+        </div>
+    </fieldset>
+    <button type="submit" class="button">Buscar!!!</button>
+</form>
+
+<hr>
+<table>
+    <tr>
+        <th>name</th>
+        <th>latitude</th>
+        <th>longitude</th>
+        <th>address</th>
+        <th>types</th>
+    </tr>
+    {% for place in places %}
+        <tr>
+            <td>{{ place.name }}</td>
+            <td>{{ place.latitude }}</td>
+            <td>{{ place.longitude }}</td>
+            <td>{{ place.address }}</td>
+            <td>{{ place.types }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<hr />
+
+<form target="_blank" action="/download/excell" method="post">
+    <input type="hidden" name="data" value="{{ places|json_encode }}">
+    <input type="hidden" name="query" value="{{ params|json_encode }}">
+    <button type="submit" class="button success" id="excell">Download .xls</button>
+</form>
+
+
+<script>
+    $(document).foundation();
+
+    $('#mySwitch').click(function () {
+        $('#types').toggle();
+    });
+</script>
+
+</body>
+</html>

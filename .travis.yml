@@ -1,0 +1,13 @@
+language: php
+php:
+  - 7.1
+addons:
+  ssh_known_hosts: vps381493.ovh.net
+cache:
+  directories:
+  - $HOME/.composer/cache/files
+before_script:
+  - composer install --prefer-source --no-interaction
+script: phpunit tests/
+after_success:
+  - bash app/deploy/deploy.sh

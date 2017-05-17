@@ -1,0 +1,29 @@
+version: "3"
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/tereplaces
+      - ./app/docker/nginx/${APP_ENV}.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php
+      - "mysql:mysql"
+    container_name: nginx
+  php:
+    build:
+      app/docker/php
+    volumes:
+      - .:/var/www/tereplaces
+    container_name: php
+  mysql:
+    build:
+      app/docker/mysql
+    ports:
+      - "33060:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    container_name: mysql
